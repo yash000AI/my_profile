@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Profile Page</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+      transform: perspective(1000px) rotateX(2deg);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      color: #e2e8f0;
+      font-size: 1rem;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #f8fafc;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.95);
+      color: #0f172a;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+    }
+
+    .secondary {
+      background: linear-gradient(135deg, #fb923c, #ef4444);
+      color: white;
+    }
+
+    .preview {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .profile-card {
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
+      color: #111827;
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 16px 35px rgba(0,0,0,0.2);
+      border: 1px solid #e5e7eb;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      margin-bottom: 12px;
+      box-shadow: 0 10px 20px rgba(124,58,237,0.25);
+    }
+
+    .profile-card h2 { margin: 0 0 8px; font-size: 1.5rem; }
+    .profile-card p { margin: 6px 0; color: #4b5563; }
+    .pill {
+      display: inline-block;
+      margin: 6px 6px 0 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .empty {
+      text-align: center;
+      color: #e2e8f0;
+      padding: 20px;
+      border: 2px dashed rgba(255,255,255,0.35);
+      border-radius: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <h1>Create Your Profile</h1>
+      <p class="subtitle">Fill in your details and see your profile appear instantly.</p>
+      <form id="profileForm">
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input id="name" name="name" placeholder="Enter your name" required />
+        </div>
+        <div class="field">
+          <label for="branch">Branch</label>
+          <input id="branch" name="branch" placeholder="e.g. AIDS" required />
+        </div>
+        <div class="field">
+          <label for="year">Year</label>
+          <select id="year" name="year" required>
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="location">Location</label>
+          <input id="location" name="location" placeholder="Enter your city" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Enter your email" required />
+        </div>
+        <div class="field">
+          <label for="about">About Me</label>
+          <textarea id="about" name="about" placeholder="Tell us a little about yourself"></textarea>
+        </div>
+        <div class="buttons">
+          <button class="primary" type="submit">Show Profile</button>
+          <button class="secondary" type="button" id="resetBtn">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="panel preview" id="previewPanel">
+      <div class="empty">Your profile preview will appear here.</div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('profileForm');
+    const previewPanel = document.getElementById('previewPanel');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function renderProfile(data) {
+      const initials = (data.name || 'U').split(' ').map(word => word[0]).join('').slice(0, 2).toUpperCase();
+      previewPanel.innerHTML = `
+        <div class="profile-card">
+          <div class="avatar">${initials}</div>
+          <h2>${data.name || 'Your Name'}</h2>
+          <p><strong>Branch:</strong> ${data.branch || 'Not provided'}</p>
+          <p><strong>Year:</strong> ${data.year || 'Not provided'}</p>
+          <p><strong>Location:</strong> ${data.location || 'Not provided'}</p>
+          <p><strong>Email:</strong> ${data.email || 'Not provided'}</p>
+          <p><strong>About:</strong> ${data.about || 'No bio added yet.'}</p>
+          <div>
+            <span class="pill">${data.branch || 'Profile'}</span>
+            <span class="pill">${data.year || 'Student'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      renderProfile(data);
+    });
+
+    resetBtn.addEventListener('click', function () {
+      form.reset();
+      previewPanel.innerHTML = '<div class="empty">Your profile preview will appear here.</div>';
+    });
+  </script>
+</body>
+</html>
